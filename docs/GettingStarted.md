@@ -4,20 +4,26 @@
 
 **These instructions were tested on Ubuntu LTS 20.04**
 
+**0. Install Python Version 3.8**
+- Install from https://www.python.org/downloads/release/python-380/
+- Watch the video: https://www.youtube.com/watch?v=m_A6dBWMITQ to setup, but with the above 3.8 installation package
+
 **1. Install torch vision**
 
 - pip install torch==1.10.1+cu113 torchvision==0.11.2+cu113 torchaudio==0.10.1+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
-**2. Clone this repository & move into the yolov5_obb directory**
+**2. Clone this repository & move into the REU-Oyster_Orientation directory**
 
 - git clone https://github.com/Zenny00/REU-Oyster_Orientation.git
-- cd yolov5_obb
+- cd REU-Oyster_Orientation
 
 **3. Install requirements**
-
+- pip install --upgrade pip setuptools wheel --user
 - pip install -r requirements.txt
+- pip install setuptools==69.5.1
 - cd utils/nms_rotated
 
+# Untested fixes - 3 June 2024
 If the first command does not work use the second command:
 - python setup.py develop  
 or 
@@ -63,6 +69,9 @@ The model requires that the dataset directory is name roboflow.
 **2. Train the model**
 
 python train.py --data /content/datasets/roboflow/data.yaml --epochs *your number of epochs* --batch-size *your batch size, i.e. 2, 4, 8, 16,...* --img *image size yolov5_obb models were trained on 640x640 images* --device *0, 1, 2, cpu* --cache --weights *your choice of backbone, example yolov5x.pt* --patience *patience value for early stopping, default value 100*
+
+# Example #
+python train.py --data datasets/roboflow/data.yaml --epochs 20 --batch-size 8 --img 640x640 --device cpu --cache --weights yolov5nOysters.pt
 
 # Run inference on model
 
